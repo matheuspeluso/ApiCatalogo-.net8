@@ -1,0 +1,66 @@
+# .NET
+bin/
+obj/
+out/
+
+# User-specific files
+.vs/
+.vscode/
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer logs
+*.cab
+*.log
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# .NET Core SDK
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# User-specific files
+# Windows image file caches
+Thumbs.db
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# .NET Core
+*.vspscc
+.vsconfig
+
+# JetBrains Rider
+.idea/
+
+# ASP.NET Core Development certificates
+https://docs.microsoft.com/en-us/aspnet/core/security/https?view=aspnetcore-6.0
+https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-6.0
+aspnetcore_https.pfx
+
+# SQLite data files
+*.db
+*.sqlite
+
+# Entity Framework Core
+# EF Core migrations, logs, etc.
+Migrations/
+
+# JetBrains Rider project files
+.idea/
+
+# MacOS
+.DS_Store
+
+# Linux
+*~
