@@ -2,6 +2,7 @@
 using APICatalogo.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace APICatalogo.Controllers
@@ -18,22 +19,33 @@ namespace APICatalogo.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Produto>> Get()//também poderia usar List porem IEnumerable é mais otimizado
+        public async Task<ActionResult<IEnumerable<Produto>>> Get()//também poderia usar List porem IEnumerable é mais otimizado
         // O ActionResult<T> permite que você retorne diferentes tipos de resultados em uma única ação. 
         {
-            var produtos = _context.Produtos.ToList(); //acessando a a tebala de produtos e retornando minha lista de produtos
+            var produtos = _context.Produtos.ToListAsync(); //acessando a a tebala de produtos e retornando minha lista de produtos
 
             if (produtos is null)
             {
                 return NotFound("Produtos não encontrados!");
             }
-            return produtos;
+            return await produtos;
         }
 
-        [HttpGet("{id:int}", Name = "ObterProduto")]
-        public ActionResult<Produto> Get(int id)
+        [HttpGet("/primeiro")] //ignora o template de rota definido em Route
+        public async Task<ActionResult<Produto>> GetPrimeiro()
         {
-            var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+            var produto = await _context.Produtos.FirstOrDefaultAsync();
+            if(produto is null)
+            {
+                return NotFound();
+            }
+            return produto;
+        }
+
+        [HttpGet("{id:int:min(1)}", Name = "ObterProduto")]
+        public async Task<ActionResult<Produto>> Get(int id)
+        {
+            var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.ProdutoId == id);
             if (produto is null)
             {
                 return NotFound("Produto não encontrado!");
